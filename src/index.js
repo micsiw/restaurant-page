@@ -1,1 +1,3 @@
-console.log('This is index.js');
+import loadPage from './website';
+
+loadPage;

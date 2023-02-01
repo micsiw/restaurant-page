@@ -1,15 +1,17 @@
-const content = document.querySelector('.content');
+import createHome from './home.js';
+import createMenu from './menu.js';
+import createContact from './contact.js';
 
-function createHeader(logoText) {
+function createHeader() {
     const header = document.createElement('header');
-    content.appendChild(header);
+    const content = document.querySelector('.content');
 
     const headerLogo = document.createElement('div');
     headerLogo.classList.add('header-logo');
     header.appendChild(headerLogo);
 
     const logo = document.createElement('h1');
-    logo.innerHTML = logoText;
+    logo.innerHTML = 'Mamma mia';
     headerLogo.appendChild(logo);
 
     const headerNav = document.createElement('div');
@@ -26,6 +28,11 @@ function createHeader(logoText) {
     linkHome.innerHTML = 'Home';
     headerNavHome.appendChild(linkHome);
 
+    linkHome.addEventListener('click', () => {
+        content.innerHTML = '';
+        content.append(createHeader(), createHero(), createHome, createFooter());
+    })
+
     const headerNavMenu = document.createElement ('li');
     headerNavLinks.appendChild(headerNavMenu);
 
@@ -33,18 +40,29 @@ function createHeader(logoText) {
     linkMenu.innerHTML = 'Menu';
     headerNavMenu.appendChild(linkMenu);
 
+    linkMenu.addEventListener('click', () => {
+        content.innerHTML = '';
+        content.append(createHeader(), createHero(), createMenu, createFooter());
+    })
+
     const headerNavContact = document.createElement ('li');
     headerNavLinks.appendChild(headerNavContact);
 
     const linkContact = document.createElement('a');
     linkContact.innerHTML = 'Contact';
     headerNavContact.appendChild(linkContact);
+
+    linkContact.addEventListener('click', () => {
+        content.innerHTML = '';
+        content.append(createHeader(), createHero(), createContact, createFooter());
+    })
+
+    return header
 }
 
 function createHero() {
     const hero = document.createElement('div');
     hero.classList.add('hero-section');
-    content.appendChild(hero);
 
     const heroTitle = document.createElement('div');
     heroTitle.classList.add('hero-title');
@@ -61,18 +79,21 @@ function createHero() {
     const heroSpacing = document.createElement('div');
     heroSpacing.classList.add('hero-spacing');
     hero.appendChild(heroSpacing);
+
+    return hero
 }
 
 function createFooter() {
     const footer = document.createElement('footer');
     footer.innerHTML = 'Created by Michał Siwanowicz';
-    content.appendChild(footer);
+
+    return footer
 }
 
 function loadPage() {
-    createHeader('Mamma mia');
-    createHero();
-    createFooter();
-}
+    const content = document.querySelector('.content');
+
+    content.append(createHeader(), createHero(), createHome, createFooter());
+};
 
 export default loadPage();
